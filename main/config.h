@@ -16,8 +16,8 @@
 
 // POST目标地址和端口
 #define POST_HOST "192.168.1.2"
-#define POST_PORT 3000
-#define POST_ENDPOINT "/api/emotion"
+#define POST_PORT 8000
+#define POST_ENDPOINT "/api/update_emotion"
 
 // WiFi AP配置
 #define AP_SSID "Emotional Damage"

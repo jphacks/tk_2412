@@ -47,7 +47,7 @@ void ADCReaderClass::begin() {
 }
 
 void ADCReaderClass::update() {
-    delay(100);
+    delay(50);
     int sensorValue = analogRead(GSR_PIN);
     SerialProxy.log("sensorValue=" + String(sensorValue));
     accumulatedValue += sensorValue;
@@ -68,14 +68,14 @@ void ADCReaderClass::update() {
     // }
 
     // 每5秒发送一次数据
-    // if (millis() - lastPostTime >= 5000) {
+    // if (millis() - lastPostTime >= 100) {
     //     if(count > 0){
     //         long average = accumulatedValue / count;
     //         // 发送POST请求
     //         WiFiClient client;
     //         if (client.connect(POST_HOST, POST_PORT)) {
     //             String postData = "value=" + String(average);
-    //             client.println("POST " + String(POST_ENDPOINT) + " HTTP/1.1");
+    //             client.println("POST " + String(POST_ENDPOINT) + "?" + postData + " HTTP/1.1");
     //             client.println("Host: " + String(POST_HOST));
     //             client.println("Content-Type: application/x-www-form-urlencoded");
     //             client.println("Content-Length: " + String(postData.length()));
