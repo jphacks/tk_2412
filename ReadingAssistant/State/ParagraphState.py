@@ -8,9 +8,9 @@ import asyncio
 import random
 import time
 
-nltk.download('punkt')
-nltk.download('punkt_tab')
-nltk.download('averaged_perceptron_tagger_eng')
+# nltk.download('punkt')
+# nltk.download('punkt_tab')
+# nltk.download('averaged_perceptron_tagger_eng')
 
 
 class ParagraphState(rx.State):
