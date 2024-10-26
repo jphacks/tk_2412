@@ -1,5 +1,5 @@
 // main.ino
-// #include "WiFiManager.h"
+#include "WiFiManager.h"
 #include "SerialProxy.h"
 #include "ADCReader.h"
 #include "config.h"

@@ -12,14 +12,34 @@ void ADCReaderClass::begin() {
     digitalWrite(LED_PIN, LOW);
     delay(1000);
 
+    for (int i = 0; i <= 100; i++) {
+      int sensorValue = analogRead(GSR_PIN);
+      SerialProxy.log(String(sensorValue));
+      delay(20);
+    }
+    
+
     sum = 0;
-    for(int i = 0; i < 500; i++) {
+    int max = 0, min = 4095;
+    for(int i = 0; i < 1000; i++) {
         int sensorValue = analogRead(GSR_PIN);
+        if (sensorValue <= 150) {
+          delay(50);
+          continue;
+        }
+        if (sensorValue > max) {
+          max = sensorValue;
+        }
+        if (sensorValue <= min) {
+          min = sensorValue;
+        }
         sum += sensorValue;
         delay(5);
     }
-    threshold = sum / 500;
+    threshold = sum / 1000;
     SerialProxy.log("threshold = " + String(threshold));
+    SerialProxy.log("max = " + String(max));
+    SerialProxy.log("min = " + String(min));
 
     lastPostTime = millis();
     accumulatedValue = 0;
@@ -27,6 +47,7 @@ void ADCReaderClass::begin() {
 }
 
 void ADCReaderClass::update() {
+    delay(100);
     int sensorValue = analogRead(GSR_PIN);
     SerialProxy.log("sensorValue=" + String(sensorValue));
     accumulatedValue += sensorValue;
