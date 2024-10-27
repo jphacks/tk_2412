@@ -1,6 +1,7 @@
 import json
 
 import openai
+from click import prompt
 from openai import OpenAI
 
 # 设置API密钥
@@ -10,10 +11,39 @@ client = OpenAI(
     api_key=api_key,
 )
 
+def generate_passage_translation(text):
+    prompt = 'Translate the following text to Japanese. I just need the translation, any other things it not needed'
+    prompt += "\n{}".format(text)
+
+    try:
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="gpt-4o-mini",
+        )
+
+        return response.choices[0].message.content
+    except Exception as e:
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="gpt-4o-mini",
+        )
+
+        return response.choices[0].message.content
 
 def generate_vocab_question(text):
     prompt = f"From the following text, create a multiple-choice question that asks the user to choose the sentence that best summarizes a paragraph or the entire text. Provide four options, with one being correct:\n\n{text}"
-    prompt += '''provide the answer in {"question": "", "choices": {"0": "", "1": ""}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
+    prompt += "And give me Japanese translation for each question and answers."
+    prompt += '''provide the answer in {"question": "", "translated_question": {"ja_JP": ""}, "choices": {"0": {"en_US": "", "jp_JA": ""}, "1": {"en_US": "", "ja_JP": ""}}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
 
     try:
         response = client.chat.completions.create(
@@ -43,7 +73,10 @@ def generate_vocab_question(text):
 
 def generate_true_false_question(text):
     prompt = f"From the following text, create a multiple-choice question that asks the user to choose the sentence that best summarizes a paragraph or the entire text. Provide four options, with one being correct:\n\n{text}"
-    prompt += '''provide the answer in {"question": "", "choices": {"0": "", "1": ""}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
+    prompt += "And give me Japanese translation for each question and answers."
+    prompt += '''provide the answer in {"question": "", "translated_question": {"ja_JP": ""}, "choices": {"0": {"en_US": "", "jp_JA": ""}, "1": {"en_US": "", "ja_JP": ""}}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
+
+
     try:
         response = client.chat.completions.create(
             messages=[
@@ -72,7 +105,10 @@ def generate_true_false_question(text):
 
 def generate_summary_question(text):
     prompt = f"From the following text, create a multiple-choice question that asks the user to choose the sentence that best summarizes a paragraph or the entire text. Provide four options, with one being correct:\n\n{text}"
-    prompt += '''provide the answer in {"question": "", "choices": {"0": "", "1": ""}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
+    prompt += "And give me Japanese translation for each question and answers."
+    prompt += '''provide the answer in {"question": "", "translated_question": {"ja_JP": ""}, "choices": {"0": {"en_US": "", "jp_JA": ""}, "1": {"en_US": "", "ja_JP": ""}}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
+
+
     try:
         response = client.chat.completions.create(
             messages=[
@@ -101,7 +137,10 @@ def generate_summary_question(text):
 
 def generate_reference_question(text):
     prompt = f"From the following text, create a multiple-choice question that asks the user to choose the sentence that best summarizes a paragraph or the entire text. Provide four options, with one being correct:\n\n{text}"
-    prompt += '''provide the answer in {"question": "", "choices": {"0": "", "1": ""}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
+    prompt += "And give me Japanese translation for each question and answers."
+    prompt += '''provide the answer in {"question": "", "translated_question": {"ja_JP": ""}, "choices": {"0": {"en_US": "", "jp_JA": ""}, "1": {"en_US": "", "ja_JP": ""}}, "correct_answer": "0"} format. Choices need to be numbered in sequence and make the correct answer random. Just give me json only.'''
+
+
     try:
         response = client.chat.completions.create(
             messages=[

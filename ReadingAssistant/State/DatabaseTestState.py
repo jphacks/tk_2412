@@ -11,5 +11,4 @@ class DatabaseTestState(rx.State):
     async def fetch_data(self):
         while True:
             with rx.session() as session:
-                emotion = session.exec(Emotion.select().order_by(Emotion.timestamp.desc())).first()
-                print("{} @ {}".format(emotion.value, emotion.timestamp))
+                emotion = reversed(session.exec(Emotion.select().order_by(Emotion.timestamp.desc()).limit(5)).all())

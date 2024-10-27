@@ -47,7 +47,7 @@ void ADCReaderClass::begin() {
 }
 
 void ADCReaderClass::update() {
-    delay(50);
+    delay(200);
     int sensorValue = analogRead(GSR_PIN);
     SerialProxy.log("sensorValue=" + String(sensorValue));
     accumulatedValue += sensorValue;
@@ -68,28 +68,28 @@ void ADCReaderClass::update() {
     // }
 
     // 每5秒发送一次数据
-    // if (millis() - lastPostTime >= 100) {
-    //     if(count > 0){
-    //         long average = accumulatedValue / count;
-    //         // 发送POST请求
-    //         WiFiClient client;
-    //         if (client.connect(POST_HOST, POST_PORT)) {
-    //             String postData = "value=" + String(average);
-    //             client.println("POST " + String(POST_ENDPOINT) + "?" + postData + " HTTP/1.1");
-    //             client.println("Host: " + String(POST_HOST));
-    //             client.println("Content-Type: application/x-www-form-urlencoded");
-    //             client.println("Content-Length: " + String(postData.length()));
-    //             client.println();
-    //             client.print(postData);
-    //             client.stop();
-    //             SerialProxy.log("Posted data: " + String(average));
-    //         } else {
-    //             SerialProxy.log("Failed to connect to server");
-    //         }
-    //         // 重置累积值
-    //         accumulatedValue = 0;
-    //         count = 0;
-    //         lastPostTime = millis();
-    //     }
-    // }
+    if (millis() - lastPostTime >= 100) {
+        if(count > 0){
+            long average = accumulatedValue / count;
+            // 发送POST请求
+            WiFiClient client;
+            if (client.connect(POST_HOST, POST_PORT)) {
+                String postData = "value=" + String(average);
+                client.println("POST " + String(POST_ENDPOINT) + "?" + postData + " HTTP/1.1");
+                client.println("Host: " + String(POST_HOST));
+                client.println("Content-Type: application/x-www-form-urlencoded");
+                client.println("Content-Length: " + String(postData.length()));
+                client.println();
+                client.print(postData);
+                client.stop();
+                SerialProxy.log("Posted data: " + String(average));
+            } else {
+                SerialProxy.log("Failed to connect to server");
+            }
+            // 重置累积值
+            accumulatedValue = 0;
+            count = 0;
+            lastPostTime = millis();
+        }
+    }
 }

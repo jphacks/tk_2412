@@ -3,7 +3,7 @@ import reflex as rx
 from ReadingAssistant.API.EmotionAPI import update_emotion
 from ReadingAssistant.Page import Index
 from ReadingAssistant.State import ParagraphState
-from ReadingAssistant.State import DatabaseTestState
+
 
 app = rx.App(
     stylesheets=[
@@ -11,5 +11,5 @@ app = rx.App(
     ],
 )
 #app.add_page(Index.index, on_load=ParagraphState.ParagraphState.timer_task)
-app.add_page(Index.index, on_load=DatabaseTestState.DatabaseTestState.fetch_data)
+app.add_page(Index.index, on_load=ParagraphState.ParagraphState.timer_task)
 app.api.add_api_route("/api/update_emotion", update_emotion, methods=["POST"])

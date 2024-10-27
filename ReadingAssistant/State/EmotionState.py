@@ -1,19 +1,19 @@
 import reflex as rx
 
 from ReadingAssistant.Model.EmotionModel import Emotion
-from datetime import datetime
-
+from ReadingAssistant.Utils.utils_function import use_model
+from ReadingAssistant.Utils.train_model import Emotion_MLP
 
 class EmotionState(rx.State):
-    latest_value: int
 
-    def get_latest_emotion(self):
+    async def get_latest_emotion(self):
         with rx.session() as session:
-            latest = session.exec(Emotion.select().order_by(Emotion.timestamp.desc())).first()
-            if latest:
-                self.latest_value = latest.value
-                # self.latest_timestamp = latest.timestamp
-            return self.latest_value#, self.latest_timestamp
+            emotions = list(reversed(session.exec(Emotion.select().order_by(Emotion.timestamp.desc()).limit(5)).all()))
+            inputs = []
 
-    def on_load(self):
-        return self.get_latest_emotion, 5 # 5 seconds
+            if len(emotions) == 5:
+                for i in emotions:
+                    inputs.append(i.value)
+
+            emotion = use_model(inputs)
+            print(emotion)

@@ -2,6 +2,8 @@ import reflex as rx
 from ReadingAssistant.State import ParagraphState
 from ReadingAssistant.State import QuestionState
 from ReadingAssistant.State import FormRadioState
+from ReadingAssistant.State.EmotionState import EmotionState
+
 
 def reading_area() -> rx.Component:
     return rx.vstack(
