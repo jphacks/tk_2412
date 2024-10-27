@@ -1,5 +1,7 @@
 # Calm Sense
-[![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2024/07/JPHACKS2024_ogp.jpg)](https://www.youtube.com/watch?v=DZXUkEj-CSI)
+
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/2096bfc1-b2f9-4d5a-b9a2-bd573e6c12be">
+
 
 
 ## 製品概要
@@ -15,6 +17,10 @@
 * センサーデータをAIで解析して焦りの有無・レベルを精確に示すのにニューラル・ネットワークを活用しました。
 * 文書をChatGPTによっていくつかの問題を出します。
 * ユーザの焦りのレベルに基づき、違う段階に違うヒントを与えます。
+
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/e57d17da-6438-46b7-99d0-a829ae390a00">
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/60f23c89-2a19-4a07-ae0c-bf7eb02bb0b4">
+
 
 ### 解決出来ること
 長くて難しい英文書を理解できないことと、理解できないことによる焦り・不安などの状況を支援します。
