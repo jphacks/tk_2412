@@ -15,9 +15,9 @@ from ReadingAssistant.Utils.question_prompt_experiment import generate_passage_t
 from ReadingAssistant.Utils.utils_function import use_model
 
 
-# nltk.download('punkt')
-# nltk.download('punkt_tab')
-# nltk.download('averaged_perceptron_tagger_eng')
+nltk.download('punkt')
+nltk.download('punkt_tab')
+nltk.download('averaged_perceptron_tagger_eng')
 
 
 class ParagraphState(rx.State):
