@@ -66,7 +66,7 @@ class ParagraphState(rx.State):
                         # self._cd_time = 10
                         yield rx.toast.warning("Emotion changes detected!")
                         # self.my_paragraphs = ["A", "B"]
-                        if self._rage_level == 0:
+                        if self._rage_level == 1:
                             qs = await self.get_state(QuestionState.QuestionState)
                             qs.is_loading = True
                             self.timer_running = False
