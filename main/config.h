@@ -15,13 +15,15 @@
 #define ESP_IP "192.168.1.1"
 
 // POST目标地址和端口
-#define POST_HOST "192.168.1.2"
+#define POST_HOST "172.20.10.8"
 #define POST_PORT 8000
 #define POST_ENDPOINT "/api/update_emotion"
 
 // WiFi AP配置
-#define AP_SSID "Emotional Damage"
-#define AP_PASSWORD "1919810@JPHacks"
+//#define AP_SSID "Emotional Damage"
+#define AP_SSID "EvydeiPhone"
+//#define AP_PASSWORD "1919810@JPHacks"
+#define AP_PASSWORD "12450471+1s"
 
 // OTA Web端口
 #define WEB_PORT 80
